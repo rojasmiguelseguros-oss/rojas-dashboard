@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM — Rojas Consultores × Insignia Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#faf8f4;--cream-d:#f0ece3;--cream-dd:#e4ddd2;--cream-ddd:#d5cdc2;
+  --ink:#1a1612;--ink-s:#3d3830;--ink-m:#7a7168;--ink-f:#b5afa6;
+  --gold:#b8860b;--gold-l:#d4a017;--gold-p:#f5e9c8;--gold-bg:#fdf6e3;
+  --green:#2d6a4f;--green-l:#40916c;--green-p:#d8f3dc;--green-bg:#f0faf3;
+  --amber:#d97706;--amber-p:#fef3c7;--amber-bg:#fffbeb;
+  --red:#c0392b;--red-p:#fde8e6;--red-bg:#fff5f4;
+  --blue:#2563a8;--blue-p:#dbeafe;--blue-bg:#eff6ff;
+  --bronce-c:#cd7f32;--bronce-p:#f5e6d3;
+  --plata-c:#8a8fa8;--plata-p:#e8eaf6;
+  --oro-c:#c9920a;--oro-p:#fff8e1;
+  --paladio-c:#6b7280;--paladio-p:#f3f4f6;
+  --platino-c:#9333ea;--platino-p:#f3e8ff;
+  --insignia-c:#dc2626;--insignia-p:#fee2e2;
+  --sh1:0 1px 3px rgba(26,22,18,.06),0 1px 2px rgba(26,22,18,.04);
+  --sh2:0 4px 12px rgba(26,22,18,.08),0 2px 4px rgba(26,22,18,.04);
+  --sh3:0 16px 40px rgba(26,22,18,.12),0 4px 8px rgba(26,22,18,.06);
+  --r:12px;--r-s:8px;--r-xs:5px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--ink);height:56px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:28px;height:28px;background:var(--gold-l);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--ink)}
+.brand-name{font-family:'Fraunces',serif;font-size:14px;font-weight:500;color:#fff}
+.brand-tag{font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;letter-spacing:1px}
+.topbar-center{display:flex;gap:4px}
+.nav-btn{padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-radius:6px;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-btn.active{background:rgba(255,255,255,.12);color:#fff}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.mes-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:4px 10px;border-radius:5px;color:#fff;font-family:'DM Mono',monospace;font-size:11px}
+.mes-pill select{background:transparent;border:none;color:#fff;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;outline:none}
+.mes-pill select option{background:#2a2520}
+.save-dot{width:6px;height:6px;border-radius:50%;background:var(--green-l)}
+
+/* ── LAYOUT ── */
+.panel{display:none;padding:22px 24px;max-width:1440px;margin:0 auto}
+.panel.active{display:block}
+.gap{margin-bottom:16px}
+.gap-sm{margin-bottom:10px}
+
+/* ── GRIDS ── */
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:16px}
+.g31{display:grid;grid-template-columns:3fr 1fr;gap:16px}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh2);border:1px solid rgba(26,22,18,.06);overflow:hidden}
+.card-hd{padding:16px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-ey{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-m);margin-bottom:3px}
+.card-ti{font-family:'Fraunces',serif;font-size:16px;font-weight:500;color:var(--ink)}
+.card-bd{padding:16px 20px 20px}
+
+/* ── STAT CARDS ── */
+.sc{background:#fff;border-radius:var(--r);padding:16px;box-shadow:var(--sh1);border:1px solid rgba(26,22,18,.06);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s;cursor:default}
+.sc:hover{transform:translateY(-1px);box-shadow:var(--sh2)}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.sc-gold::after{background:var(--gold-l)}.sc-green::after{background:var(--green-l)}
+.sc-amber::after{background:var(--amber)}.sc-red::after{background:var(--red)}.sc-blue::after{background:var(--blue)}
+.sc-ey{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-m);margin-bottom:7px}
+.sc-val{font-family:'Fraunces',serif;font-size:28px;font-weight:700;line-height:1;margin-bottom:4px}
+.sc-gold .sc-val{color:var(--gold)}.sc-green .sc-val{color:var(--green)}
+.sc-amber .sc-val{color:var(--amber)}.sc-red .sc-val{color:var(--red)}.sc-blue .sc-val{color:var(--blue)}
+.sc-sub{font-size:11px;color:var(--ink-m)}.sc-sub strong{color:var(--ink-s);font-weight:600}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap}
+.b-green{background:var(--green-p);color:var(--green)}.b-amber{background:var(--amber-p);color:var(--amber)}
+.b-red{background:var(--red-p);color:var(--red)}.b-gold{background:var(--gold-p);color:var(--gold)}
+.b-blue{background:var(--blue-p);color:var(--blue)}.b-gray{background:var(--cream-dd);color:var(--ink-m)}
+.b-bronce{background:var(--bronce-p);color:var(--bronce-c)}.b-plata{background:var(--plata-p);color:var(--plata-c)}
+.b-oro{background:var(--oro-p);color:var(--oro-c)}.b-paladio{background:var(--paladio-p);color:var(--paladio-c)}
+.b-platino{background:var(--platino-p);color:var(--platino-c)}.b-insignia{background:var(--insignia-p);color:var(--insignia-c)}
+
+/* ── PROGRESS ── */
+.pb{margin-bottom:13px}.pb:last-child{margin-bottom:0}
+.pb-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.pb-lbl{font-size:12px;font-weight:500;color:var(--ink-s)}
+.pb-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-m)}
+.pb-val strong{color:var(--ink);font-size:12px}
+.pb-track{height:8px;background:var(--cream-dd);border-radius:99px;overflow:hidden}
+.pb-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.fv{background:linear-gradient(90deg,var(--green-l),#52b788)}
+.fo{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.fa{background:linear-gradient(90deg,var(--amber),#f59e0b)}
+.fr{background:linear-gradient(90deg,var(--red),#e74c3c)}
+.pv{color:var(--green);font-weight:600;font-family:'DM Mono',monospace;font-size:11px}
+.po{color:var(--gold);font-weight:600;font-family:'DM Mono',monospace;font-size:11px}
+.pa{color:var(--amber);font-weight:600;font-family:'DM Mono',monospace;font-size:11px}
+.pr{color:var(--red);font-weight:600;font-family:'DM Mono',monospace;font-size:11px}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-m);padding:8px 10px;text-align:left;border-bottom:1px solid var(--cream-dd);font-weight:500;white-space:nowrap}
+.tbl td{padding:10px 10px;border-bottom:1px solid rgba(26,22,18,.04);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--cream)}
+.tbl tr.highlight td{background:var(--gold-bg)}
+.tbl-empty{text-align:center;padding:28px!important;color:var(--ink-f);font-family:'DM Mono',monospace;font-size:12px}
+
+/* ── INPUTS ── */
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;color:var(--ink-m)}
+.field input,.field select,.field textarea{width:100%;background:var(--cream);border:1.5px solid var(--cream-dd);border-radius:var(--r-s);padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:border-color .15s,background .15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold-l);background:var(--gold-bg)}
+.field textarea{resize:vertical;min-height:70px}
+.fgrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+/* ── BUTTONS ── */
+.btn{padding:9px 20px;border-radius:var(--r-s);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{background:var(--ink-s);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--cream-dd);color:var(--ink-s)}.btn-outline:hover{background:var(--cream)}
+.btn-red{background:var(--red-p);color:var(--red);border:1px solid rgba(192,57,43,.2)}.btn-red:hover{background:var(--red);color:#fff}
+.btn-green{background:var(--green-p);color:var(--green);border:1px solid rgba(45,106,79,.2)}.btn-green:hover{background:var(--green);color:#fff}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:5px}
+.btn-xs{padding:3px 8px;font-size:10px;border-radius:4px}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,22,18,.55);z-index:500;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--r);width:600px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--sh3)}
+.modal-hd{padding:18px 22px;border-bottom:1px solid var(--cream-dd);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-ti{font-family:'Fraunces',serif;font-size:17px;font-weight:500}
+.modal-close{background:var(--cream);border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:13px;color:var(--ink-m);display:flex;align-items:center;justify-content:center}
+.modal-bd{padding:20px 22px;display:flex;flex-direction:column;gap:13px}
+.modal-ft{padding:14px 22px;border-top:1px solid var(--cream-dd);display:flex;gap:8px;justify-content:flex-end;position:sticky;bottom:0;background:#fff}
+
+/* ── DIVIDER ── */
+.dv{height:1px;background:var(--cream-dd);margin:12px 0}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-m);margin-bottom:8px}
+
+/* ── PIPELINE KANBAN ── */
+.kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+.kanban-col{background:var(--cream);border-radius:var(--r-s);border:1px solid var(--cream-dd);overflow:hidden}
+.kanban-hd{padding:10px 12px;background:var(--cream-d);border-bottom:1px solid var(--cream-dd);display:flex;align-items:center;justify-content:space-between}
+.kanban-title{font-size:11px;font-weight:600;color:var(--ink-s);letter-spacing:.3px}
+.kanban-count{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--ink-m)}
+.kanban-body{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:80px}
+.kanban-card{background:#fff;border-radius:6px;padding:10px 12px;box-shadow:var(--sh1);border:1px solid rgba(26,22,18,.06);cursor:pointer;transition:all .15s}
+.kanban-card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+.kc-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.kc-meta{font-size:11px;color:var(--ink-m);font-family:'DM Mono',monospace}
+.kc-alert{font-size:10px;color:var(--red);background:var(--red-p);padding:2px 6px;border-radius:3px;margin-top:4px;display:inline-block}
+.kc-ok{font-size:10px;color:var(--green);background:var(--green-p);padding:2px 6px;border-radius:3px;margin-top:4px;display:inline-block}
+.kc-blocked{border-left:3px solid var(--amber)!important}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.1))}
+.tl-item{position:relative;margin-bottom:14px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-24px;top:3px;width:14px;height:14px;border-radius:50%;border:2px solid var(--cream-dd);background:#fff;display:flex;align-items:center;justify-content:center;font-size:7px}
+.tl-dot.done{border-color:var(--green-l);background:var(--green-l)}
+.tl-dot.active{border-color:var(--gold-l);background:var(--gold-p)}
+.tl-dot.blocked{border-color:var(--amber);background:var(--amber-p)}
+.tl-dot.pending{border-color:var(--cream-ddd);background:var(--cream)}
+.tl-label{font-size:12px;font-weight:600;color:var(--ink-s)}
+.tl-meta{font-size:11px;color:var(--ink-m);font-family:'DM Mono',monospace;margin-top:1px}
+
+/* ── SCORE ── */
+.score-ring{display:flex;flex-direction:column;align-items:center;gap:4px}
+.score-num{font-family:'Fraunces',serif;font-size:36px;font-weight:700;line-height:1}
+.score-lbl{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;color:var(--ink-m)}
+
+/* ── PONDERACIÓN ── */
+.pond-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed rgba(26,22,18,.07)}
+.pond-row:last-child{border:none;font-weight:700}
+.pond-lbl{font-size:12px;color:var(--ink-s);display:flex;align-items:center;gap:6px}
+.pond-dot{width:7px;height:7px;border-radius:50%}
+.pond-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500}
+
+/* ── LLAVE BOX ── */
+.llave{padding:10px 14px;border-radius:var(--r-s);border:1px solid transparent;font-size:12px}
+.llave-ok{background:var(--green-bg);border-color:rgba(45,106,79,.15);color:var(--ink-s)}
+.llave-warn{background:var(--amber-bg);border-color:rgba(217,119,6,.2);color:var(--ink-s)}
+.llave-fail{background:var(--red-bg);border-color:rgba(192,57,43,.2);color:var(--ink-s)}
+.llave strong{font-weight:700}
+
+/* ── DECISIONS ── */
+.dec{display:flex;gap:10px;padding:11px;border-radius:var(--r-s);margin-bottom:8px;border:1px solid transparent;cursor:pointer;transition:transform .12s}
+.dec:hover{transform:translateX(2px)}.dec:last-child{margin:0}
+.d-urg{background:var(--red-bg);border-color:rgba(192,57,43,.15)}
+.d-imp{background:var(--amber-bg);border-color:rgba(217,119,6,.15)}
+.d-ok{background:var(--green-bg);border-color:rgba(45,106,79,.12)}
+.d-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.di-urg{background:var(--red-p)}.di-imp{background:var(--amber-p)}.di-ok{background:var(--green-p)}
+.d-ti{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.d-desc{font-size:11px;color:var(--ink-m);line-height:1.5}
+.d-fecha{font-size:10px;font-family:'DM Mono',monospace;color:var(--ink-f);margin-top:2px}
+.d-chk{margin-left:auto;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--cream-dd);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.d-chk:hover{border-color:var(--green-l);background:var(--green-p)}
+.d-chk.done{background:var(--green-l);border-color:var(--green);color:#fff;font-size:10px}
+
+/* ── RANKING ── */
+.rank-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(26,22,18,.05)}
+.rank-item:last-child{border:none}
+.rank-pos{font-family:'Fraunces',serif;font-size:20px;font-weight:700;width:24px;color:var(--ink-f);flex-shrink:0}
+.rank-pos.p1{color:var(--gold-l)}.rank-pos.p2{color:var(--plata-c)}.rank-pos.p3{color:var(--bronce-c)}
+.rank-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.rank-name{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.rank-meta{font-size:11px;color:var(--ink-m);font-family:'DM Mono',monospace;margin-top:1px}
+.rank-val{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--gold);text-align:right}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--green);color:#fff;padding:9px 16px;border-radius:7px;font-size:11px;font-family:'DM Mono',monospace;letter-spacing:1px;z-index:999;opacity:0;transform:translateY(8px);transition:all .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── VENTA TAG ── */
+.venta-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600}
+.vt-vita{background:#e8f4ff;color:#1a56a8}.vt-ppr{background:#f0fdf4;color:#166534}
+
+/* ── ALERT BANNER ── */
+.ab{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r-s);margin-bottom:12px;border:1px solid transparent;font-size:12px}
+.ab-r{background:var(--red-bg);border-color:rgba(192,57,43,.2);color:var(--ink-s)}
+.ab-a{background:var(--amber-bg);border-color:rgba(217,119,6,.2);color:var(--ink-s)}
+.ab-g{background:var(--green-bg);border-color:rgba(45,106,79,.15);color:var(--ink-s)}
+
+/* ── FICHA AGENTE ── */
+.ficha-grid{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start}
+.ficha-sidebar{display:flex;flex-direction:column;gap:12px}
+.ficha-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:#fff;flex-shrink:0}
+.ficha-main{display:flex;flex-direction:column;gap:14px}
+
+/* ── RESPONSIVO ── */
+@media(max-width:1100px){.g5,.g4{grid-template-columns:repeat(2,1fr)}.kanban{grid-template-columns:repeat(3,1fr)}.g21,.g31,.ficha-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.panel{padding:14px 12px}.g3,.g2{grid-template-columns:1fr}.kanban{grid-template-columns:1fr 1fr}.fgrid2,.fgrid3{grid-template-columns:1fr}.topbar-center{display:none}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">R</div>
+    <div>
+      <div class="brand-name">Rojas Consultores</div>
+      <div class="brand-tag">// CRM · INSIGNIA LIFE 150%</div>
+    </div>
+  </div>
+  <div class="topbar-center">
+    <button class="nav-btn active" onclick="goPanel('dashboard',this)">📊 Dashboard</button>
+    <button class="nav-btn" onclick="goPanel('reclutamiento',this)">👥 Reclutamiento</button>
+    <button class="nav-btn" onclick="goPanel('agentes',this)">🏅 Agentes</button>
+    <button class="nav-btn" onclick="goPanel('produccion',this)">💼 Producción</button>
+    <button class="nav-btn" onclick="goPanel('ranking',this)">🏆 Rankings</button>
+  </div>
+  <div class="topbar-right">
+    <div class="mes-pill">
+      <span style="color:rgba(255,255,255,.4);font-size:9px;letter-spacing:1px">MES</span>
+      <select id="selMes" onchange="cambiarMes()">
+        <script>for(let i=1;i<=24;i++)document.write(`<option value="${i}">Mes ${i}</option>`)</script>
+      </select>
+    </div>
+    <div class="save-dot" id="saveDot" title="Datos guardados"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<div class="panel active" id="dashboard">
+
+  <div class="g5 gap" id="statsRow"></div>
+
+  <div class="g21 gap">
+    <div class="card">
+      <div class="card-hd">
+        <div><div class="card-ey">Posición vs objetivo 150%</div><div class="card-ti">Metas del mes</div></div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <div id="pondBadge"></div>
+        </div>
+      </div>
+      <div class="card-bd" id="metasBars"></div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div><div class="card-ey">Convenio Insignia Life</div><div class="card-ti">Apoyo mensual</div></div></div>
+      <div class="card-bd" id="apoyoBox"></div>
+    </div>
+  </div>
+
+  <div class="g2 gap">
+    <div class="card">
+      <div class="card-hd"><div><div class="card-ey">Auto-generado · Lunes 9AM</div><div class="card-ti">Decisiones de la semana</div></div></div>
+      <div class="card-bd" id="decisiones"></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <div><div class="card-ey">Captura semanal</div><div class="card-ti">KPIs de la semana</div></div>
+      </div>
+      <div class="card-bd" id="capturaRapida"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ RECLUTAMIENTO ═══════════════ -->
+<div class="panel" id="reclutamiento">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <div>
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:500">Pipeline de reclutamiento</div>
+      <div style="font-size:12px;color:var(--ink-m);margin-top:2px">Candidatos · Entrevista inicial → Clave Insignia Life</div>
+    </div>
+    <button class="btn btn-dark" onclick="abrirModalCandidato()">+ Nuevo candidato</button>
+  </div>
+
+  <div class="g4 gap" id="statsReclu"></div>
+
+  <div class="card gap">
+    <div class="card-hd"><div><div class="card-ey">Kanban de etapas</div><div class="card-ti">Estado de candidatos</div></div></div>
+    <div class="card-bd">
+      <div class="kanban" id="kanbanBoard"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div><div class="card-ey">Listado completo</div><div class="card-ti">Todos los candidatos</div></div></div>
+    <div class="card-bd" style="padding-top:10px">
+      <table class="tbl"><thead><tr>
+        <th>Candidato</th><th>Fuente</th><th>Etapa</th><th>P200</th><th>Días en proceso</th><th>Alerta</th><th>Acción</th>
+      </tr></thead><tbody id="recluBody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ AGENTES ═══════════════ -->
+<div class="panel" id="agentes">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <div>
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:500">Equipo de agentes</div>
+      <div style="font-size:12px;color:var(--ink-m);margin-top:2px">Desarrollo · Trazando Tu Camino · Score de desempeño</div>
+    </div>
+    <button class="btn btn-dark" onclick="abrirFichaAgente()">+ Agente directo</button>
+  </div>
+
+  <div id="alertasBanner"></div>
+
+  <div class="card gap">
+    <div class="card-hd"><div><div class="card-ey">Vista de equipo</div><div class="card-ti">Todos los agentes activos</div></div></div>
+    <div class="card-bd" style="padding-top:10px">
+      <table class="tbl"><thead><tr>
+        <th>Agente</th><th>Tipo</th><th>Mes TTC</th><th>Nivel TTC</th><th>Siguiente nivel</th><th>Pólizas</th><th>Prima comp.</th><th>Score</th><th>Días sin act.</th><th>Acciones</th>
+      </tr></thead><tbody id="agentesBody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- FICHA DETALLE -->
+  <div id="fichaDetalle"></div>
+</div>
+
+<!-- ═══════════════ PRODUCCIÓN ═══════════════ -->
+<div class="panel" id="produccion">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <div>
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:500">Registro de producción</div>
+      <div style="font-size:12px;color:var(--ink-m);margin-top:2px">Ventas · Prima ponderada automática · KPIs por agente</div>
+    </div>
+    <button class="btn btn-gold" onclick="abrirModalVenta()">+ Registrar venta</button>
+  </div>
+
+  <div class="g4 gap" id="statsProd"></div>
+
+  <div class="g21 gap">
+    <div class="card">
+      <div class="card-hd"><div><div class="card-ey">Historial de ventas</div><div class="card-ti">Registro completo</div></div></div>
+      <div class="card-bd" style="padding-top:10px">
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <select id="filtroAgente" style="padding:6px 10px;border:1.5px solid var(--cream-dd);border-radius:6px;background:var(--cream);font-size:12px;color:var(--ink);outline:none" onchange="renderVentas()">
+            <option value="">Todos los agentes</option>
+          </select>
+          <select id="filtroProducto" style="padding:6px 10px;border:1.5px solid var(--cream-dd);border-radius:6px;background:var(--cream);font-size:12px;color:var(--ink);outline:none" onchange="renderVentas()">
+            <option value="">Todos los productos</option>
+            <option value="vitalicio">Vitalicio / VPL-10</option>
+            <option value="ppr">PPR / Plan de Retiro</option>
+          </select>
+          <select id="filtroPeriodo" style="padding:6px 10px;border:1.5px solid var(--cream-dd);border-radius:6px;background:var(--cream);font-size:12px;color:var(--ink);outline:none" onchange="renderVentas()">
+            <option value="mes">Este mes</option>
+            <option value="semana">Esta semana</option>
+            <option value="todo">Todo el historial</option>
+          </select>
+        </div>
+        <table class="tbl"><thead><tr>
+          <th>Fecha</th><th>Agente</th><th>Producto</th><th>Años</th><th>Prima pagada</th><th>Factor</th><th>Prima comp.</th><th>Acciones</th>
+        </tr></thead><tbody id="ventasBody"></tbody></table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div><div class="card-ey">KPIs por agente</div><div class="card-ti">Desempeño individual</div></div></div>
+      <div class="card-bd" id="kpiAgentes"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ RANKINGS ═══════════════ -->
+<div class="panel" id="ranking">
+  <div style="margin-bottom:16px">
+    <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:500">Rankings y reconocimientos</div>
+    <div style="font-size:12px;color:var(--ink-m);margin-top:2px">Gamificación · Medallas · Detección de líderes</div>
+  </div>
+  <div id="rankingContent"></div>
+</div>
+
+<!-- ═══════════════ MODALES ═══════════════ -->
+
+<!-- Modal candidato -->
+<div class="overlay" id="modalCandidato">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-ti" id="titCandidato">Nuevo candidato</div><button class="modal-close" onclick="cerrar('modalCandidato')">✕</button></div>
+    <div class="modal-bd">
+      <div class="fgrid2">
+        <div class="field"><label>Nombre completo</label><input type="text" id="cNombre" placeholder="Nombre apellido"></div>
+        <div class="field"><label>Fuente de reclutamiento</label>
+          <select id="cFuente"><option value="linkedin">LinkedIn</option><option value="facebook">Facebook</option><option value="referido">Referido de agente</option><option value="directo">Contacto directo</option><option value="otro">Otro</option></select>
+        </div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Fecha de primer contacto</label><input type="date" id="cFechaContacto"></div>
+        <div class="field"><label>Teléfono / WhatsApp</label><input type="text" id="cTelefono" placeholder="55 1234 5678"></div>
+      </div>
+      <div class="field"><label>Notas iniciales</label><textarea id="cNotas" placeholder="Perfil, motivación, disponibilidad..."></textarea></div>
+      <div class="dv"></div>
+      <div class="section-label">Etapas del proceso</div>
+      <div class="fgrid2">
+        <div class="field"><label>Entrevista inicial</label><input type="date" id="cE1"></div>
+        <div class="field"><label>Entrevista de selección</label><input type="date" id="cE2"></div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Proyecto 200 — fecha entrega</label><input type="date" id="cP200fecha"></div>
+        <div class="field"><label>Proyecto 200 — resultado</label>
+          <select id="cP200res"><option value="">Pendiente</option><option value="cumplido">✓ Cumplido</option><option value="no_cumplido">✗ No cumplido</option></select>
+        </div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Entrevista de carrera</label><input type="date" id="cE3"><div style="font-size:10px;color:var(--amber);margin-top:3px;font-family:'DM Mono',monospace">⚠ Requiere P200 cumplido</div></div>
+        <div class="field"><label>Fecha liberación clave Insignia</label><input type="date" id="cClave"><div style="font-size:10px;color:var(--green);margin-top:3px;font-family:'DM Mono',monospace">✓ Convierte a agente activo</div></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-outline" onclick="cerrar('modalCandidato')">Cancelar</button>
+      <button class="btn btn-dark" onclick="guardarCandidato()">Guardar candidato</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal venta -->
+<div class="overlay" id="modalVenta">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-ti" id="titVenta">Registrar venta</div><button class="modal-close" onclick="cerrar('modalVenta')">✕</button></div>
+    <div class="modal-bd">
+      <div class="fgrid2">
+        <div class="field"><label>Agente</label>
+          <select id="vAgente"><option value="">Seleccionar agente...</option></select>
+        </div>
+        <div class="field"><label>Fecha de venta</label><input type="date" id="vFecha"></div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Producto</label>
+          <select id="vProducto" onchange="actualizarFactor()">
+            <option value="vitalicio">Vitalicio / VPL-10 (80%)</option>
+            <option value="ppr">PPR / Plan de Retiro (factor manual)</option>
+          </select>
+        </div>
+        <div class="field"><label>Años del plan</label>
+          <select id="vAnios"><option value="5">5 años</option><option value="10">10 años</option><option value="15">15 años</option><option value="20">20 años</option><option value="25">25 años</option></select>
+        </div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Prima anualizada pagada ($)</label><input type="number" id="vPrima" placeholder="0" min="0" oninput="calcPrimaComp()"></div>
+        <div class="field"><label>Factor ponderación</label><input type="number" id="vFactor" placeholder="80" min="0" max="100" value="80" oninput="calcPrimaComp()"></div>
+      </div>
+      <div style="background:var(--gold-bg);border:1px solid rgba(184,134,11,.2);border-radius:var(--r-s);padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase">Prima computable</div>
+        <div style="font-size:10px;color:rgba(184,134,11,.6);font-family:'DM Mono',monospace;margin-top:2px">Cuenta para metas Insignia Life</div></div>
+        <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:var(--gold)" id="primaCompDisplay">$0</div>
+      </div>
+      <div class="field"><label>Conteo de póliza (TTC)</label>
+        <div id="conteoPolizaInfo" style="padding:8px 12px;background:var(--cream);border-radius:var(--r-s);font-size:12px;color:var(--ink-m);font-family:'DM Mono',monospace">Ingresa prima para calcular conteo</div>
+      </div>
+      <div class="field"><label>Notas</label><input type="text" id="vNotas" placeholder="Cliente, observaciones..."></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-outline" onclick="cerrar('modalVenta')">Cancelar</button>
+      <button class="btn btn-gold" onclick="guardarVenta()">Registrar venta</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ficha agente directo -->
+<div class="overlay" id="modalAgente">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-ti" id="titAgente">Agente directo</div><button class="modal-close" onclick="cerrar('modalAgente')">✕</button></div>
+    <div class="modal-bd">
+      <div class="fgrid2">
+        <div class="field"><label>Nombre</label><input type="text" id="aNombre"></div>
+        <div class="field"><label>Tipo</label>
+          <select id="aTipo"><option value="aspirante">Aspirante</option><option value="agente">Agente definitivo</option></select>
+        </div>
+      </div>
+      <div class="fgrid2">
+        <div class="field"><label>Fecha liberación clave Insignia</label><input type="date" id="aClave"><div style="font-size:10px;color:var(--gold);margin-top:3px;font-family:'DM Mono',monospace">Mes 1 TTC inicia aquí</div></div>
+        <div class="field"><label>Días sin actividad</label><input type="number" id="aDias" value="0" min="0"></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-outline" onclick="cerrar('modalAgente')">Cancelar</button>
+      <button class="btn btn-dark" onclick="guardarAgenteDirecto()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✓ GUARDADO</div>
+
+<!-- ═══════════════ SCRIPT ═══════════════ -->
+<script>
+// ══════════════════════════════════════════
+// MODELO 150% INSIGNIA LIFE
+// ══════════════════════════════════════════
+const MODELO = [
+  [1,2,0,0,0,22500,22500,2250,450,0,3000*0,0,0,60000,0,62700],
+  [2,3,0,0,0,31500,54000,3150,630,0,0,0,0,60000,0,63780],
+  [3,4,0,0,0,52500,106500,5250,1050,0,0,0,0,60000,0,66300],
+  [4,8,1,0,0,79500,186000,7950,1590,0,3000,0,0,60000,0,72540],
+  [5,9,2,0,0,109500,295500,10950,2190,0,3000,0,0,60000,0,76140],
+  [6,11,3,0,0,124500,420000,12450,2490,0,3000,0,0,60000,40000,117940],
+  [7,12,4,1,0,154500,574500,15450,3090,0,3000,20000,0,45000,0,86540],
+  [8,13,5,2,0,181500,756000,18150,3630,0,3000,20000,0,45000,0,89780],
+  [9,14,6,3,0,211500,967500,21150,4230,30113,3000,20000,0,45000,0,123493],
+  [10,16,7,4,0,232500,1200000,23250,4650,0,3000,20000,0,45000,0,95900],
+  [11,17,8,5,0,262500,1462500,26250,5250,0,3000,20000,0,45000,0,99500],
+  [12,18,9,6,0,285000,1747500,28500,5700,42900,3000,20000,0,45000,60000,205100],
+  [13,20,10,7,1,300000,2047500,30000,6000,0,3000,20000,25000,30000,0,114000],
+  [14,21,11,8,0,307500,2355000,30750,6150,0,3000,20000,25000,30000,0,114900],
+  [15,23,12,9,0,315000,2670000,31500,6300,59963,3000,20000,25000,30000,0,175763],
+  [16,24,13,10,0,322500,2992500,32250,6450,0,3000,20000,25000,30000,0,116700],
+  [17,26,14,11,0,334500,3327000,33450,6690,0,3000,20000,25000,30000,0,118140],
+  [18,27,15,12,0,355500,3682500,35550,7110,65813,3000,20000,25000,30000,80000,266473],
+  [19,29,16,13,0,382500,4065000,38250,7650,0,3000,20000,25000,22500,0,116400],
+  [20,30,17,14,0,412500,4477500,41250,8250,0,3000,20000,25000,22500,0,120000],
+  [21,32,18,15,0,420000,4897500,42000,8400,78975,3000,20000,25000,22500,0,199875],
+  [22,33,19,16,0,435000,5332500,43500,8700,0,3000,20000,25000,22500,0,122700],
+  [23,35,20,17,0,442500,5775000,44250,8850,0,3000,20000,25000,22500,0,123600],
+  [24,36,21,18,0,457500,6232500,45750,9150,86775,3000,20000,25000,22500,100000,312175],
+];
+
+// Niveles TTC
+const TTC = [
+  {nombre:'Bronce',prima:9000,polizas:3,mes:3,color:'bronce',emoji:'🥉',premio:'Kit Bronce + tarjetas'},
+  {nombre:'Plata',prima:45000,polizas:12,mes:6,color:'plata',emoji:'🥈',premio:'Kit Plata + reembolso $6K'},
+  {nombre:'Oro',prima:70000,polizas:18,mes:9,color:'oro',emoji:'🥇',premio:'$7,000 en cuenta'},
+  {nombre:'Paladio',prima:160000,polizas:24,mes:12,color:'paladio',emoji:'⚙️',premio:'$17,000 en cuenta'},
+  {nombre:'Platino',prima:260000,polizas:30,mes:15,color:'platino',emoji:'💎',premio:'$23,000 en cuenta'},
+  {nombre:'Insignia',prima:400000,polizas:40,mes:18,color:'insignia',emoji:'🏆',premio:'$23,000 + Apple Watch'},
+];
+
+const ETAPAS = ['Entrevista inicial','Entrevista selección','Proyecto 200','Entrevista carrera','Clave liberada'];
+const COLORES_AVATAR = ['#2d6a4f','#2563a8','#b8860b','#9333ea','#c0392b','#d97706','#0891b2','#7c3aed'];
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+const fmt = n => n===0?'$0':'$'+Math.round(n).toLocaleString('es-MX');
+const pct = (r,m) => m>0?Math.min(Math.round(r/m*100),100):0;
+const hoy = () => new Date().toISOString().split('T')[0];
+const diffDias = (d1,d2=hoy()) => Math.max(0,Math.round((new Date(d2)-new Date(d1))/(1000*60*60*24)));
+const mesDesde = (fechaClave) => {
+  if(!fechaClave) return 1;
+  const ini = new Date(fechaClave);
+  const ahora = new Date();
+  return Math.max(1,(ahora.getFullYear()-ini.getFullYear())*12+(ahora.getMonth()-ini.getMonth())+1);
+};
+const initials = n => n.trim().split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2);
+const avatarColor = n => COLORES_AVATAR[n.charCodeAt(0)%COLORES_AVATAR.length];
+
+function conteoPoliza(prima){
+  if(prima<10000)return 0;
+  if(prima<50000)return 1;
+  if(prima<150000)return 2;
+  return 3;
+}
+
+function nivelTTC(mesTTC,polizas,primaComp){
+  let idx=-1;
+  for(let i=0;i<TTC.length;i++){
+    if(polizas>=TTC[i].polizas && primaComp>=TTC[i].prima) idx=i;
+  }
+  return idx;
+}
+
+function sigNivel(polizas,primaComp){
+  for(let i=0;i<TTC.length;i++){
+    if(primaComp<TTC[i].prima||polizas<TTC[i].polizas) return i;
+  }
+  return -1;
+}
+
+function getPond(mes){
+  if(mes<=6) return {prima:100,bronces:0,platas:0};
+  if(mes<=18) return {prima:70,bronces:30,platas:0};
+  return {prima:60,bronces:20,platas:20};
+}
+
+function calcCumpl(mes,primaAcum,altasReal,broncesReal,platasReal){
+  const d=MODELO[mes-1];
+  const p=getPond(mes);
+  const pp=pct(primaAcum,d[6])*p.prima/100;
+  const pb=p.bronces>0?pct(broncesReal,d[2])*p.bronces/100:0;
+  const ppl=p.platas>0?pct(platasReal,d[3])*p.platas/100:0;
+  return Math.min(pp+pb+ppl,150);
+}
+
+function getApoyo(c,mes){
+  const s=mes<=6?0:mes<=12?1:mes<=18?2:3;
+  const t=[[0,0,0,0],[10000,7500,5000,0],[20000,15000,10000,7500],[40000,30000,20000,15000],[50000,35000,25000,17500],[60000,45000,30000,22500]];
+  if(c<85)return 0;if(c<90)return t[1][s];if(c<100)return t[2][s];if(c<115)return t[3][s];if(c<125)return t[4][s];return t[5][s];
+}
+
+function scoreDesempeno(agente){
+  const ventas = STATE.ventas.filter(v=>v.agenteId===agente.id);
+  const primaTotal = ventas.reduce((s,v)=>s+v.primaComp,0);
+  const d = MODELO[Math.min(agente.mesTTC||1,24)-1];
+  // Actividad (30%): citas realizadas vs agendadas estimadas
+  const actScore = agente.diasSin<7?100:agente.diasSin<14?70:agente.diasSin<21?40:10;
+  // Producción (50%): prima vs meta del mes TTC
+  const prodScore = pct(primaTotal,d[5]);
+  // Consistencia (20%): semanas consecutivas con venta
+  const semanas = new Set(ventas.map(v=>v.fecha?v.fecha.slice(0,7):''));
+  const consScore = Math.min(semanas.size*20,100);
+  return Math.round(actScore*0.3+prodScore*0.5+consScore*0.2);
+}
+
+// ══════════════════════════════════════════
+// STATE & PERSISTENCE
+// ══════════════════════════════════════════
+let STATE = {mes:1,candidatos:[],agentes:[],ventas:[],kpis:{c:0,ci:0,p:0,prima:0,act:0,cand:0}};
+let editCandIdx=-1, editAgIdx=-1, editVentaIdx=-1;
+
+function cargar(){
+  try{
+    const s=JSON.parse(localStorage.getItem('rc_crm_v1')||'{}');
+    if(s.mes) STATE.mes=s.mes;
+    if(s.candidatos) STATE.candidatos=s.candidatos;
+    if(s.agentes) STATE.agentes=s.agentes;
+    if(s.ventas) STATE.ventas=s.ventas;
+    if(s.kpis) STATE.kpis=s.kpis;
+    document.getElementById('selMes').value=STATE.mes;
+    if(STATE.kpis.c)document.getElementById('ic')&&(document.getElementById('ic').value=STATE.kpis.c);
+  }catch(e){}
+}
+
+function guardar(){
+  localStorage.setItem('rc_crm_v1',JSON.stringify(STATE));
+  const dot=document.getElementById('saveDot');
+  if(dot){dot.style.background='var(--gold-l)';setTimeout(()=>dot.style.background='var(--green-l)',800);}
+  showToast();
+}
+
+function showToast(msg='✓ GUARDADO'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// ══════════════════════════════════════════
+// NAVEGACIÓN
+// ══════════════════════════════════════════
+function goPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  renderPanel(id);
+}
+
+function cambiarMes(){
+  STATE.mes=+document.getElementById('selMes').value;
+  guardar();
+  renderTodo();
+}
+
+// ══════════════════════════════════════════
+// RENDER DASHBOARD
+// ══════════════════════════════════════════
+function renderDashboard(){
+  const d=MODELO[STATE.mes-1];
+  const primaAcum = STATE.ventas.reduce((s,v)=>s+v.primaComp,0);
+  const bronces = STATE.agentes.filter(a=>nivelTTC(a.mesTTC||1,a.polizas||0,agentePrimaComp(a.id))>=0).length;
+  const platas = STATE.agentes.filter(a=>nivelTTC(a.mesTTC||1,a.polizas||0,agentePrimaComp(a.id))>=1).length;
+  const cumpl = calcCumpl(STATE.mes,primaAcum,STATE.kpis.act||0,bronces,platas);
+  const apoyo = getApoyo(cumpl,STATE.mes);
+  const primaAcumMes = STATE.ventas.filter(v=>v.fecha&&v.fecha.startsWith(new Date().toISOString().slice(0,7))).reduce((s,v)=>s+v.primaComp,0);
+
+  // Stats
+  document.getElementById('statsRow').innerHTML=`
+    <div class="sc sc-gold"><div class="sc-ey">Prima comp. del mes</div><div class="sc-val">${fmt(primaAcumMes)}</div><div class="sc-sub">Meta: <strong>${fmt(d[5])}</strong> · ${pct(primaAcumMes,d[5])}%</div></div>
+    <div class="sc sc-blue"><div class="sc-ey">Agentes activos</div><div class="sc-val">${STATE.agentes.length}</div><div class="sc-sub">Candidatos en proceso: <strong>${STATE.candidatos.filter(c=>!c.clave).length}</strong></div></div>
+    <div class="sc sc-green"><div class="sc-ey">Cumplimiento ponderado</div><div class="sc-val">${cumpl.toFixed(0)}%</div><div class="sc-sub">Apoyo proyectado: <strong>${fmt(apoyo)}</strong></div></div>
+    <div class="sc sc-amber"><div class="sc-ey">Ventas este mes</div><div class="sc-val">${STATE.ventas.filter(v=>v.fecha&&v.fecha.startsWith(new Date().toISOString().slice(0,7))).length}</div><div class="sc-sub">Total histórico: <strong>${STATE.ventas.length}</strong></div></div>
+    <div class="sc sc-red"><div class="sc-ey">Agentes en riesgo</div><div class="sc-val">${STATE.agentes.filter(a=>a.diasSin>=14).length}</div><div class="sc-sub">+14 días sin actividad</div></div>
+  `;
+
+  // Barras de metas
+  const pond=getPond(STATE.mes);
+  document.getElementById('pondBadge').innerHTML=`<span class="badge b-gold">Pond: ${pond.prima}% prima / ${pond.bronces}% bronces / ${pond.platas}% platas</span>`;
+
+  const bars=[
+    {l:'Prima computable del mes',r:primaAcumMes,m:d[5],money:true},
+    {l:'Altas acumuladas',r:STATE.kpis.act||0,m:d[1]},
+    {l:'Bronces acumulados',r:bronces,m:Math.max(d[2],1)},
+    {l:'Contactos / semana',r:STATE.kpis.c||0,m:40},
+  ];
+  document.getElementById('metasBars').innerHTML=bars.map(b=>{
+    const p=pct(b.r,b.m);
+    const fc=p>=90?'fv':p>=70?'fo':p>=40?'fa':'fr';
+    const pc=p>=90?'pv':p>=70?'po':p>=40?'pa':'pr';
+    return`<div class="pb"><div class="pb-top"><div class="pb-lbl">${b.l}</div><div class="pb-val"><strong>${b.money?fmt(b.r):b.r}</strong> / ${b.money?fmt(b.m):b.m} <span class="${pc}">${p}%</span></div></div><div class="pb-track"><div class="pb-fill ${fc}" style="width:${p}%"></div></div></div>`;
+  }).join('');
+
+  // Apoyo box
+  const llaveAltas=(STATE.kpis.act||0)>=d[1];
+  const llavePrima=primaAcumMes>=d[5]*0.5;
+  const llaveOk=llaveAltas&&llavePrima;
+  document.getElementById('apoyoBox').innerHTML=`
+    <div class="llave ${llaveOk?'llave-ok':(!llaveAltas||!llavePrima)?'llave-warn':'llave-ok'}">
+      <strong>${llaveOk?'✅ Llave activa':'⚠️ Llave incompleta'}</strong><br>
+      Altas: ${STATE.kpis.act||0}/${d[1]} ${llaveAltas?'✓':'✗'} · Prima ≥50%: ${fmt(primaAcumMes)}/${fmt(d[5]*0.5)} ${llavePrima?'✓':'✗'}
+      ${!llaveOk?'<br><span style="color:var(--red)">Sin ambas condiciones no hay pago de apoyo.</span>':''}
+    </div>
+    <div class="dv"></div>
+    ${[['Comisiones',d[7],'var(--blue)'],['% Recluta',d[8],'var(--platino-c)'],['Bono trim.',d[9],'var(--green-l)'],
+       ['Bronces $',d[10],'var(--bronce-c)'],['Platas $',d[11],'var(--plata-c)'],['Apoyo base',d[13],'var(--gold)'],['Apoyo adic.',d[14],'var(--amber)']
+      ].filter(x=>x[1]>0).map(x=>`<div class="pond-row"><div class="pond-lbl"><div class="pond-dot" style="background:${x[2]}"></div>${x[0]}</div><div class="pond-val">${fmt(x[1])}</div></div>`).join('')}
+    <div class="pond-row"><div class="pond-lbl" style="font-weight:700">Total proyectado</div><div class="pond-val" style="color:var(--gold);font-size:15px">${fmt(d[15])}</div></div>`;
+
+  // Captura rápida
+  renderCapturaRapida();
+
+  // Decisiones
+  renderDecisiones();
+}
+
+function renderCapturaRapida(){
+  const kp=STATE.kpis;
+  document.getElementById('capturaRapida').innerHTML=`
+    <div class="fgrid2" style="gap:10px">
+      <div class="field"><label>Contactos/sem</label><input type="number" id="ic" value="${kp.c||''}" placeholder="0" min="0" oninput="saveKpi()"></div>
+      <div class="field"><label>Citas realizadas</label><input type="number" id="ici" value="${kp.ci||''}" placeholder="0" min="0" oninput="saveKpi()"></div>
+      <div class="field"><label>Prima del mes ($)</label><input type="number" id="iprima" value="${kp.prima||''}" placeholder="0" min="0" oninput="saveKpi()"></div>
+      <div class="field"><label>Altas acumuladas</label><input type="number" id="iact" value="${kp.act||''}" placeholder="0" min="0" oninput="saveKpi()"></div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--ink-f);font-family:'DM Mono',monospace">Se guarda automáticamente</div>`;
+}
+
+function saveKpi(){
+  STATE.kpis.c=+document.getElementById('ic')?.value||0;
+  STATE.kpis.ci=+document.getElementById('ici')?.value||0;
+  STATE.kpis.prima=+document.getElementById('iprima')?.value||0;
+  STATE.kpis.act=+document.getElementById('iact')?.value||0;
+  guardar();
+  renderDecisiones();
+}
+
+function renderDecisiones(){
+  const d=MODELO[STATE.mes-1];
+  const primaAcumMes=STATE.ventas.filter(v=>v.fecha&&v.fecha.startsWith(new Date().toISOString().slice(0,7))).reduce((s,v)=>s+v.primaComp,0);
+  const decs=[];
+  if(pct(primaAcumMes,d[5])<70&&primaAcumMes>0) decs.push({t:'urg',i:'📉',ti:'Prima por debajo del 70%',de:`Llevas ${pct(primaAcumMes,d[5])}% de la meta mensual. Activar cierres esta semana.`,f:'Inmediato'});
+  STATE.agentes.forEach(a=>{
+    if(a.diasSin>=21)decs.push({t:'urg',i:'🔴',ti:`Decisión: ${a.nombre}`,de:`${a.diasSin} días sin actividad. Corte o plan de rescate con fecha límite hoy.`,f:'Antes del viernes'});
+    else if(a.diasSin>=14)decs.push({t:'imp',i:'⚠️',ti:`Alerta silenciosa: ${a.nombre}`,de:`${a.diasSin} días inactivo. Intervenir antes del día 21.`,f:'Esta semana'});
+    if(a.tipo==='aspirante'&&(a.mesTTC||1)>=5)decs.push({t:'urg',i:'⏰',ti:`Aspirante vence: ${a.nombre}`,de:`Mes ${a.mesTTC} de 5 permitidos. Obtener cédula definitiva o conteo se revierte.`,f:'Urgente'});
+  });
+  STATE.candidatos.filter(c=>!c.clave&&c.e2&&!c.p200res).forEach(c=>decs.push({t:'imp',i:'📋',ti:`P200 pendiente: ${c.nombre}`,de:'Entregó entrevista de selección pero Proyecto 200 no está marcado.',f:'Verificar'}));
+  if((STATE.kpis.cand||0)===0&&STATE.mes<=18)decs.push({t:'imp',i:'👥',ti:'Pipeline vacío',de:'Sin candidatos en proceso activo. Activar 40 contactos esta semana.',f:'Esta semana'});
+  if(!decs.length)decs.push({t:'ok',i:'✅',ti:'Sin alertas críticas',de:'Operación dentro de parámetros. Mantén el ritmo.',f:'Próxima revisión: lunes'});
+  const cls={urg:'d-urg',imp:'d-imp',ok:'d-ok'};
+  const ic={urg:'di-urg',imp:'di-imp',ok:'di-ok'};
+  const el=document.getElementById('decisiones');
+  if(el)el.innerHTML=decs.map((dc,i)=>`<div class="dec ${cls[dc.t]}"><div class="d-icon ${ic[dc.t]}">${dc.i}</div><div style="flex:1"><div class="d-ti">${dc.ti}</div><div class="d-desc">${dc.de}</div><div class="d-fecha">${dc.f}</div></div><div class="d-chk" id="dch${i}" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div></div>`).join('');
+}
+
+// ══════════════════════════════════════════
+// RENDER RECLUTAMIENTO
+// ══════════════════════════════════════════
+function renderReclutamiento(){
+  const total=STATE.candidatos.length;
+  const activos=STATE.candidatos.filter(c=>!c.clave).length;
+  const conP200=STATE.candidatos.filter(c=>c.p200res==='cumplido').length;
+  const convertidos=STATE.candidatos.filter(c=>c.clave).length;
+  document.getElementById('statsReclu').innerHTML=`
+    <div class="sc sc-blue"><div class="sc-ey">Total candidatos</div><div class="sc-val">${total}</div><div class="sc-sub">Histórico del embudo</div></div>
+    <div class="sc sc-amber"><div class="sc-ey">En proceso activo</div><div class="sc-val">${activos}</div><div class="sc-sub">Sin clave liberada aún</div></div>
+    <div class="sc sc-gold"><div class="sc-ey">P200 cumplido</div><div class="sc-val">${conP200}</div><div class="sc-sub">Listos para entrevista carrera</div></div>
+    <div class="sc sc-green"><div class="sc-ey">Convertidos a agente</div><div class="sc-val">${convertidos}</div><div class="sc-sub">Tasa: ${total>0?Math.round(convertidos/total*100):0}%</div></div>
+  `;
+
+  // Kanban
+  const cols=['e1','e2','p200','e3','clave'];
+  const titulos=['Entrevista inicial','Entrevista selección','Proyecto 200','Entrevista carrera','Clave liberada ✓'];
+  const getCandEtapa=(c)=>{
+    if(c.clave)return 4;
+    if(c.e3)return 3;
+    if(c.p200res==='cumplido'&&c.e2)return 2;
+    if(c.e2)return 2;
+    if(c.e1)return 1;
+    return 0;
+  };
+  const kanban=document.getElementById('kanbanBoard');
+  if(kanban) kanban.innerHTML=titulos.map((tit,i)=>{
+    const cands=STATE.candidatos.filter(c=>getCandEtapa(c)===i);
+    const cards=cands.map((c,ci)=>{
+      const idx=STATE.candidatos.indexOf(c);
+      const dias=c.fechaContacto?diffDias(c.fechaContacto):0;
+      const bloqueado=i===3&&c.p200res!=='cumplido';
+      const alerta=dias>21?`<div class="kc-alert">+${dias}d sin avanzar</div>`:bloqueado?`<div class="kc-alert">Requiere P200</div>`:'';
+      return`<div class="kanban-card ${bloqueado?'kc-blocked':''}" onclick="verCandidato(${idx})">
+        <div class="kc-name">${c.nombre}</div>
+        <div class="kc-meta">${c.fuente||''} · ${dias}d</div>
+        ${i>=1&&c.p200res==='cumplido'?'<div class="kc-ok">P200 ✓</div>':alerta}
+      </div>`;
+    }).join('');
+    return`<div class="kanban-col">
+      <div class="kanban-hd"><div class="kanban-title">${tit}</div><div class="kanban-count">${cands.length}</div></div>
+      <div class="kanban-body">${cards||'<div style="font-size:11px;color:var(--ink-f);text-align:center;padding:12px">Sin candidatos</div>'}</div>
+    </div>`;
+  }).join('');
+
+  // Tabla
+  const tb=document.getElementById('recluBody');
+  if(!tb)return;
+  if(!STATE.candidatos.length){tb.innerHTML=`<tr><td colspan="7" class="tbl-empty">Sin candidatos registrados</td></tr>`;return;}
+  tb.innerHTML=STATE.candidatos.map((c,i)=>{
+    const etapaIdx=getCandEtapa(c);
+    const dias=c.fechaContacto?diffDias(c.fechaContacto):0;
+    const alerta=c.tipo==='aspirante'&&!c.clave&&dias>45?'<span class="badge b-red">Estancado</span>':dias>21?'<span class="badge b-amber">Seguimiento</span>':'<span class="badge b-green">OK</span>';
+    return`<tr>
+      <td><div style="font-weight:600;font-size:13px">${c.nombre}</div><div style="font-size:11px;color:var(--ink-m);font-family:'DM Mono',monospace">${c.telefono||''}</div></td>
+      <td><span class="badge b-gray">${c.fuente||'—'}</span></td>
+      <td><span class="badge b-blue">${ETAPAS[etapaIdx]}</span></td>
+      <td>${c.p200res==='cumplido'?'<span class="badge b-green">✓ Cumplido</span>':c.p200res==='no_cumplido'?'<span class="badge b-red">✗ No cumplido</span>':'<span class="badge b-gray">Pendiente</span>'}</td>
+      <td><span style="font-family:'DM Mono',monospace;font-size:12px">${dias}d</span></td>
+      <td>${alerta}</td>
+      <td style="display:flex;gap:4px">
+        <button class="btn btn-outline btn-xs" onclick="verCandidato(${i})">Ver</button>
+        <button class="btn btn-outline btn-xs" onclick="editarCandidato(${i})">Editar</button>
+        ${!c.clave?`<button class="btn btn-green btn-xs" onclick="convertirAgente(${i})">→ Agente</button>`:'<span style="font-size:10px;color:var(--green);font-family:DM Mono,monospace">Convertido ✓</span>'}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// RENDER AGENTES
+// ══════════════════════════════════════════
+function agentePrimaComp(id){
+  return STATE.ventas.filter(v=>v.agenteId===id).reduce((s,v)=>s+v.primaComp,0);
+}
+
+function agentePolizas(id){
+  return STATE.ventas.filter(v=>v.agenteId===id).reduce((s,v)=>s+v.conteoPoliza,0);
+}
+
+function renderAgentes(){
+  // Alertas
+  const criticos=STATE.agentes.filter(a=>a.diasSin>=21||(a.tipo==='aspirante'&&(a.mesTTC||1)>=5));
+  const warns=STATE.agentes.filter(a=>a.diasSin>=14&&a.diasSin<21);
+  const ab=document.getElementById('alertasBanner');
+  if(ab){
+    ab.innerHTML='';
+    if(criticos.length)ab.innerHTML+=`<div class="ab ab-r">🔴 <strong>${criticos.length} agente(s) requieren decisión inmediata.</strong></div>`;
+    if(warns.length)ab.innerHTML+=`<div class="ab ab-a">⚠️ <strong>${warns.length} agente(s)</strong> con alerta silenciosa (+14 días sin actividad).</div>`;
+  }
+
+  const tb=document.getElementById('agentesBody');
+  if(!tb)return;
+  if(!STATE.agentes.length){tb.innerHTML=`<tr><td colspan="10" class="tbl-empty">Sin agentes registrados — convierte candidatos desde Reclutamiento o agrega uno directo</td></tr>`;return;}
+  tb.innerHTML=STATE.agentes.map((a,i)=>{
+    const primaComp=agentePrimaComp(a.id);
+    const polizas=agentePolizas(a.id);
+    const mesTTC=a.mesTTC||mesDesde(a.fechaClave)||1;
+    const nivelIdx=nivelTTC(mesTTC,polizas,primaComp);
+    const sigIdx=sigNivel(polizas,primaComp);
+    const nivel=nivelIdx>=0?TTC[nivelIdx]:null;
+    const sig=sigIdx>=0?TTC[sigIdx]:null;
+    const score=scoreDesempeno({...a,mesTTC});
+    const scoreColor=score>=70?'var(--green)':score>=40?'var(--amber)':'var(--red)';
+    const diasCls=a.diasSin>=21?'pr':a.diasSin>=14?'pa':'pv';
+    const silent=a.diasSin>=14?`<div style="font-size:9px;color:var(--red);background:var(--red-p);padding:1px 5px;border-radius:3px;margin-top:2px;display:inline-block">ALERTA</div>`:'';
+    return`<tr>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        <div class="rank-avatar" style="background:${avatarColor(a.nombre)};width:28px;height:28px;font-size:11px">${initials(a.nombre)}</div>
+        <div><div style="font-weight:600;font-size:13px">${a.nombre}</div><div style="font-size:10px;color:var(--ink-m);font-family:'DM Mono',monospace">${a.tipo==='aspirante'?'Aspirante':'Agente'}</div></div>
+      </div></td>
+      <td><span class="badge ${a.tipo==='aspirante'?'b-amber':'b-green'}">${a.tipo==='aspirante'?'Aspirante':'Agente'}</span></td>
+      <td><span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:600">Mes ${mesTTC}</span></td>
+      <td>${nivel?`<span class="badge b-${nivel.color}">${nivel.emoji} ${nivel.nombre}</span>`:`<span class="badge b-gray">Sin nivel</span>`}</td>
+      <td>${sig?`<div style="font-size:11px;color:var(--ink-s)">${sig.emoji} ${sig.nombre}</div><div style="font-size:10px;color:var(--ink-f);font-family:'DM Mono',monospace">Falta ${fmt(Math.max(0,sig.prima-primaComp))} · ${Math.max(0,sig.polizas-polizas)} póls</div>`:`<span style="font-size:11px;color:var(--green)">🏆 Máximo</span>`}</td>
+      <td><span style="font-family:'DM Mono',monospace;font-weight:700">${polizas}</span></td>
+      <td><span style="font-family:'DM Mono',monospace;font-weight:700">${fmt(primaComp)}</span></td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div style="font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:${scoreColor}">${score}</div><div style="font-size:10px;color:var(--ink-f)">/100</div></div></td>
+      <td><span class="${diasCls}" style="font-family:'DM Mono',monospace;font-size:12px;font-weight:600">${a.diasSin}d</span>${silent}</td>
+      <td style="display:flex;gap:4px">
+        <button class="btn btn-outline btn-xs" onclick="verFichaAgente(${i})">Ficha</button>
+        <button class="btn btn-outline btn-xs" onclick="editarAgente(${i})">Editar</button>
+        <button class="btn btn-red btn-xs" onclick="eliminarAgente(${i})">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function verFichaAgente(idx){
+  const a=STATE.agentes[idx];
+  const primaComp=agentePrimaComp(a.id);
+  const polizas=agentePolizas(a.id);
+  const mesTTC=a.mesTTC||mesDesde(a.fechaClave)||1;
+  const nivelIdx=nivelTTC(mesTTC,polizas,primaComp);
+  const sigIdx=sigNivel(polizas,primaComp);
+  const nivel=nivelIdx>=0?TTC[nivelIdx]:null;
+  const sig=sigIdx>=0?TTC[sigIdx]:null;
+  const score=scoreDesempeno({...a,mesTTC});
+  const scoreColor=score>=70?'var(--green)':score>=40?'var(--amber)':'var(--red)';
+  const ventasAgente=STATE.ventas.filter(v=>v.agenteId===a.id);
+
+  // Timeline TTC
+  const tlItems=[
+    {label:'Clave liberada por Insignia Life',fecha:a.fechaClave,done:!!a.fechaClave,active:!a.fechaClave},
+    ...TTC.map(t=>({label:`Nivel ${t.nombre}`,sub:`${t.polizas} pólizas · ${fmt(t.prima)} prima comp. · Al mes ${t.mes}`,done:nivelIdx>=TTC.indexOf(t),active:sigIdx===TTC.indexOf(t)}))
+  ];
+
+  const fd=document.getElementById('fichaDetalle');
+  if(!fd)return;
+  fd.innerHTML=`<div class="card" style="margin-top:16px">
+    <div class="card-hd">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="rank-avatar" style="background:${avatarColor(a.nombre)};width:48px;height:48px;font-size:18px">${initials(a.nombre)}</div>
+        <div>
+          <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:500">${a.nombre}</div>
+          <div style="font-size:12px;color:var(--ink-m)">${a.tipo==='aspirante'?'Aspirante':'Agente definitivo'} · Mes TTC ${mesTTC} · Clave: ${a.fechaClave||'Pendiente'}</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('fichaDetalle').innerHTML=''">Cerrar ficha</button>
+    </div>
+    <div class="card-bd">
+      <div class="ficha-grid">
+        <div class="ficha-sidebar">
+          <div style="text-align:center;padding:16px;background:var(--cream);border-radius:var(--r-s)">
+            <div style="font-size:10px;font-family:'DM Mono',monospace;letter-spacing:1px;color:var(--ink-m);margin-bottom:6px">SCORE DESEMPEÑO</div>
+            <div style="font-family:'Fraunces',serif;font-size:48px;font-weight:700;color:${scoreColor};line-height:1">${score}</div>
+            <div style="font-size:11px;color:var(--ink-f);font-family:'DM Mono',monospace">/100</div>
+            <div style="font-size:10px;color:var(--ink-m);margin-top:6px">Act 30% · Prod 50% · Cons 20%</div>
+          </div>
+          <div style="padding:14px;background:var(--cream);border-radius:var(--r-s)">
+            <div style="font-size:10px;font-family:'DM Mono',monospace;letter-spacing:1px;color:var(--ink-m);margin-bottom:10px">MÉTRICAS</div>
+            ${[['Prima computable',fmt(primaComp)],['Pólizas de conteo',polizas],['Ventas registradas',ventasAgente.length],['Días sin actividad',a.diasSin+'d']].map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(26,22,18,.07);font-size:12px"><span style="color:var(--ink-m)">${l}</span><span style="font-family:'DM Mono',monospace;font-weight:600">${v}</span></div>`).join('')}
+          </div>
+          ${nivel?`<div style="padding:12px;background:var(--${nivel.color}-p||var(--gold-p));border-radius:var(--r-s);text-align:center"><span class="badge b-${nivel.color}" style="font-size:13px">${nivel.emoji} ${nivel.nombre}</span><div style="font-size:11px;color:var(--ink-m);margin-top:6px">${nivel.premio}</div></div>`:''}
+          ${sig?`<div style="padding:12px;background:var(--cream);border-radius:var(--r-s)"><div style="font-size:10px;font-family:'DM Mono',monospace;letter-spacing:1px;color:var(--ink-m);margin-bottom:8px">SIGUIENTE: ${sig.emoji} ${sig.nombre.toUpperCase()}</div>
+            <div class="pb"><div class="pb-top"><div class="pb-lbl" style="font-size:11px">Prima</div><div class="pb-val">${fmt(primaComp)}/${fmt(sig.prima)}</div></div><div class="pb-track"><div class="pb-fill fo" style="width:${pct(primaComp,sig.prima)}%"></div></div></div>
+            <div class="pb" style="margin-top:8px"><div class="pb-top"><div class="pb-lbl" style="font-size:11px">Pólizas</div><div class="pb-val">${polizas}/${sig.polizas}</div></div><div class="pb-track"><div class="pb-fill fo" style="width:${pct(polizas,sig.polizas)}%"></div></div></div>
+          </div>`:''}
+        </div>
+        <div class="ficha-main">
+          <div>
+            <div class="section-label">Timeline Trazando Tu Camino</div>
+            <div class="timeline">${tlItems.map(t=>`<div class="tl-item"><div class="tl-dot ${t.done?'done':t.active?'active':'pending'}"></div><div class="tl-label">${t.label}</div>${t.fecha?`<div class="tl-meta">${t.fecha}</div>`:''}${t.sub?`<div class="tl-meta">${t.sub}</div>`:''}</div>`).join('')}</div>
+          </div>
+          <div>
+            <div class="section-label">Últimas ventas</div>
+            ${ventasAgente.length?`<table class="tbl"><thead><tr><th>Fecha</th><th>Producto</th><th>Prima pagada</th><th>Prima comp.</th></tr></thead><tbody>${ventasAgente.slice(-5).reverse().map(v=>`<tr><td style="font-family:'DM Mono',monospace;font-size:11px">${v.fecha||'—'}</td><td><span class="venta-tag ${v.producto==='vitalicio'?'vt-vita':'vt-ppr'}">${v.producto==='vitalicio'?'Vitalicio':'PPR'}</span></td><td style="font-family:'DM Mono',monospace">${fmt(v.prima)}</td><td style="font-family:'DM Mono',monospace;color:var(--gold);font-weight:600">${fmt(v.primaComp)}</td></tr>`).join('')}</tbody></table>`:`<div style="font-size:12px;color:var(--ink-f);padding:12px 0">Sin ventas registradas aún</div>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  fd.scrollIntoView({behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════
+// RENDER PRODUCCIÓN
+// ══════════════════════════════════════════
+function renderProduccion(){
+  const hoyStr=new Date().toISOString().slice(0,7);
+  const ventasMes=STATE.ventas.filter(v=>v.fecha&&v.fecha.startsWith(hoyStr));
+  const primaMes=ventasMes.reduce((s,v)=>s+v.primaComp,0);
+  const primaTotal=STATE.ventas.reduce((s,v)=>s+v.primaComp,0);
+  const promedio=STATE.ventas.length?Math.round(STATE.ventas.reduce((s,v)=>s+v.prima,0)/STATE.ventas.length):0;
+
+  document.getElementById('statsProd').innerHTML=`
+    <div class="sc sc-gold"><div class="sc-ey">Prima comp. del mes</div><div class="sc-val">${fmt(primaMes)}</div><div class="sc-sub">${ventasMes.length} ventas este mes</div></div>
+    <div class="sc sc-blue"><div class="sc-ey">Prima comp. total</div><div class="sc-val">${fmt(primaTotal)}</div><div class="sc-sub">${STATE.ventas.length} ventas históricas</div></div>
+    <div class="sc sc-green"><div class="sc-ey">Prima promedio</div><div class="sc-val">${fmt(promedio)}</div><div class="sc-sub">Por venta registrada</div></div>
+    <div class="sc sc-amber"><div class="sc-ey">Agentes productivos</div><div class="sc-val">${new Set(ventasMes.map(v=>v.agenteId)).size}</div><div class="sc-sub">Con venta este mes</div></div>
+  `;
+
+  // Actualizar selector de agentes
+  const sel=document.getElementById('vAgente');
+  const selF=document.getElementById('filtroAgente');
+  [sel,selF].forEach(s=>{
+    if(!s)return;
+    const cur=s.value;
+    s.innerHTML=s===sel?'<option value="">Seleccionar agente...</option>':'<option value="">Todos los agentes</option>';
+    STATE.agentes.forEach(a=>s.innerHTML+=`<option value="${a.id}" ${a.id===cur?'selected':''}>${a.nombre}</option>`);
+  });
+
+  renderVentas();
+  renderKpiAgentes();
+}
+
+function renderVentas(){
+  const fa=document.getElementById('filtroAgente')?.value||'';
+  const fp=document.getElementById('filtroProducto')?.value||'';
+  const per=document.getElementById('filtroPeriodo')?.value||'mes';
+  const hoyStr=new Date().toISOString();
+  const semIni=new Date();semIni.setDate(semIni.getDate()-semIni.getDay());
+
+  let ventas=[...STATE.ventas];
+  if(fa)ventas=ventas.filter(v=>v.agenteId===fa);
+  if(fp)ventas=ventas.filter(v=>v.producto===fp);
+  if(per==='mes')ventas=ventas.filter(v=>v.fecha&&v.fecha.startsWith(hoyStr.slice(0,7)));
+  if(per==='semana')ventas=ventas.filter(v=>v.fecha&&new Date(v.fecha)>=semIni);
+  ventas.sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
+
+  const tb=document.getElementById('ventasBody');
+  if(!tb)return;
+  if(!ventas.length){tb.innerHTML=`<tr><td colspan="8" class="tbl-empty">Sin ventas en este período</td></tr>`;return;}
+  tb.innerHTML=ventas.map(v=>{
+    const ag=STATE.agentes.find(a=>a.id===v.agenteId);
+    const idx=STATE.ventas.indexOf(v);
+    return`<tr>
+      <td style="font-family:'DM Mono',monospace;font-size:11px">${v.fecha||'—'}</td>
+      <td>${ag?`<div style="font-weight:600;font-size:12px">${ag.nombre}</div>`:'<span style="color:var(--ink-f)">—</span>'}</td>
+      <td><span class="venta-tag ${v.producto==='vitalicio'?'vt-vita':'vt-ppr'}">${v.producto==='vitalicio'?'Vitalicio/VPL':'PPR'}</span></td>
+      <td style="font-family:'DM Mono',monospace;font-size:12px">${v.anios} años</td>
+      <td style="font-family:'DM Mono',monospace;font-weight:600">${fmt(v.prima)}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-m)">${v.factor}%</td>
+      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--gold)">${fmt(v.primaComp)}</td>
+      <td><button class="btn btn-red btn-xs" onclick="eliminarVenta(${idx})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderKpiAgentes(){
+  const el=document.getElementById('kpiAgentes');
+  if(!el)return;
+  if(!STATE.agentes.length){el.innerHTML='<div style="font-size:12px;color:var(--ink-f);padding:12px 0">Sin agentes registrados</div>';return;}
+  el.innerHTML=STATE.agentes.map(a=>{
+    const hoyStr=new Date().toISOString().slice(0,7);
+    const ventasMes=STATE.ventas.filter(v=>v.agenteId===a.id&&v.fecha&&v.fecha.startsWith(hoyStr));
+    const primaMes=ventasMes.reduce((s,v)=>s+v.primaComp,0);
+    const totalVentas=STATE.ventas.filter(v=>v.agenteId===a.id).length;
+    const mesTTC=a.mesTTC||mesDesde(a.fechaClave)||1;
+    const metaMes=MODELO[Math.min(mesTTC,24)-1][5]/Math.max(STATE.agentes.length,1);
+    return`<div style="padding:10px 0;border-bottom:1px solid rgba(26,22,18,.05)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <div style="font-weight:600;font-size:13px">${a.nombre}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--gold)">${fmt(primaMes)}</div>
+      </div>
+      <div class="pb-track"><div class="pb-fill ${pct(primaMes,metaMes)>=80?'fv':'fa'}" style="width:${Math.min(pct(primaMes,metaMes),100)}%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink-f);font-family:'DM Mono',monospace;margin-top:3px"><span>${ventasMes.length} ventas este mes</span><span>${totalVentas} total</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// RENDER RANKINGS
+// ══════════════════════════════════════════
+function renderRanking(){
+  const el=document.getElementById('rankingContent');
+  if(!el)return;
+  if(STATE.agentes.length<2){
+    el.innerHTML=`<div class="card"><div class="card-bd" style="text-align:center;padding:48px">
+      <div style="font-size:40px;margin-bottom:12px">🏆</div>
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:500;margin-bottom:8px">Rankings activos con 4+ agentes</div>
+      <div style="font-size:13px;color:var(--ink-m)">Tienes ${STATE.agentes.length} agente(s). Los rankings se activan automáticamente cuando el equipo supera 4 agentes.</div>
+    </div></div>`;
+    return;
+  }
+
+  const porPrima=[...STATE.agentes].map(a=>({...a,primaComp:agentePrimaComp(a.id),score:scoreDesempeno({...a,mesTTC:a.mesTTC||mesDesde(a.fechaClave)||1})})).sort((a,b)=>b.primaComp-a.primaComp);
+  const porScore=[...porPrima].sort((a,b)=>b.score-a.score);
+  const enRiesgo=STATE.agentes.filter(a=>a.diasSin>=14).sort((a,b)=>b.diasSin-a.diasSin);
+
+  el.innerHTML=`<div class="g3">
+    <div class="card"><div class="card-hd"><div><div class="card-ey">Por prima computable</div><div class="card-ti">Top productores</div></div></div>
+    <div class="card-bd">${porPrima.map((a,i)=>`<div class="rank-item">
+      <div class="rank-pos ${i===0?'p1':i===1?'p2':i===2?'p3':''}">${i+1}</div>
+      <div class="rank-avatar" style="background:${avatarColor(a.nombre)};width:32px;height:32px;font-size:12px">${initials(a.nombre)}</div>
+      <div><div class="rank-name">${a.nombre}</div><div class="rank-meta">${nivelTTC(a.mesTTC||1,agentePolizas(a.id),a.primaComp)>=0?TTC[nivelTTC(a.mesTTC||1,agentePolizas(a.id),a.primaComp)].emoji+' '+TTC[nivelTTC(a.mesTTC||1,agentePolizas(a.id),a.primaComp)].nombre:'Sin nivel'}</div></div>
+      <div><div class="rank-val">${fmt(a.primaComp)}</div></div>
+    </div>`).join('')}</div></div>
+
+    <div class="card"><div class="card-hd"><div><div class="card-ey">Por score de desempeño</div><div class="card-ti">Top rendimiento</div></div></div>
+    <div class="card-bd">${porScore.map((a,i)=>{
+      const sc=a.score;const sc_c=sc>=70?'var(--green)':sc>=40?'var(--amber)':'var(--red)';
+      return`<div class="rank-item"><div class="rank-pos ${i===0?'p1':i===1?'p2':i===2?'p3':''}">${i+1}</div>
+      <div class="rank-avatar" style="background:${avatarColor(a.nombre)};width:32px;height:32px;font-size:12px">${initials(a.nombre)}</div>
+      <div><div class="rank-name">${a.nombre}</div><div class="rank-meta">Act·Prod·Cons</div></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:${sc_c}">${sc}</div><div style="font-size:10px;color:var(--ink-f);text-align:right">/100</div></div>
+    </div>`;}).join('')}</div></div>
+
+    <div class="card"><div class="card-hd"><div><div class="card-ey">Requieren atención</div><div class="card-ti">Agentes en riesgo</div></div></div>
+    <div class="card-bd">${enRiesgo.length?enRiesgo.map(a=>`<div class="rank-item">
+      <div class="rank-avatar" style="background:var(--red-p);color:var(--red);width:32px;height:32px;font-size:12px">${initials(a.nombre)}</div>
+      <div><div class="rank-name">${a.nombre}</div><div class="rank-meta">${a.diasSin}d sin actividad</div></div>
+      <span class="badge ${a.diasSin>=21?'b-red':'b-amber'}">${a.diasSin>=21?'Decisión':'Atención'}</span>
+    </div>`).join(''):`<div style="text-align:center;padding:20px;font-size:12px;color:var(--green)">✅ Sin agentes en riesgo</div>`}</div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px"><div class="card-hd"><div><div class="card-ey">Programa Trazando Tu Camino</div><div class="card-ti">Medallas del equipo</div></div></div>
+  <div class="card-bd"><div class="g3">${TTC.map(t=>{
+    const ganadores=STATE.agentes.filter(a=>nivelTTC(a.mesTTC||1,agentePolizas(a.id),agentePrimaComp(a.id))>=TTC.indexOf(t));
+    return`<div style="text-align:center;padding:16px;background:var(--cream);border-radius:var(--r-s)">
+      <div style="font-size:28px;margin-bottom:6px">${t.emoji}</div>
+      <span class="badge b-${t.color}" style="font-size:12px">${t.nombre}</span>
+      <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:var(--ink);margin:8px 0">${ganadores.length}</div>
+      <div style="font-size:11px;color:var(--ink-m)">${ganadores.map(a=>a.nombre).join(', ')||'Ninguno aún'}</div>
+    </div>`;
+  }).join('')}</div></div></div>`;
+}
+
+// ══════════════════════════════════════════
+// MODALES — CANDIDATO
+// ══════════════════════════════════════════
+function abrirModalCandidato(){
+  editCandIdx=-1;
+  document.getElementById('titCandidato').textContent='Nuevo candidato';
+  ['cNombre','cTelefono','cNotas','cE1','cE2','cP200fecha','cE3','cClave'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('cFuente').value='linkedin';
+  document.getElementById('cP200res').value='';
+  document.getElementById('cFechaContacto').value=hoy();
+  document.getElementById('modalCandidato').classList.add('open');
+}
+
+function editarCandidato(idx){
+  editCandIdx=idx;
+  const c=STATE.candidatos[idx];
+  document.getElementById('titCandidato').textContent=`Editar: ${c.nombre}`;
+  document.getElementById('cNombre').value=c.nombre||'';
+  document.getElementById('cFuente').value=c.fuente||'linkedin';
+  document.getElementById('cFechaContacto').value=c.fechaContacto||'';
+  document.getElementById('cTelefono').value=c.telefono||'';
+  document.getElementById('cNotas').value=c.notas||'';
+  document.getElementById('cE1').value=c.e1||'';
+  document.getElementById('cE2').value=c.e2||'';
+  document.getElementById('cP200fecha').value=c.p200fecha||'';
+  document.getElementById('cP200res').value=c.p200res||'';
+  document.getElementById('cE3').value=c.e3||'';
+  document.getElementById('cClave').value=c.clave||'';
+  document.getElementById('modalCandidato').classList.add('open');
+}
+
+function guardarCandidato(){
+  const nombre=document.getElementById('cNombre').value.trim();
+  if(!nombre){alert('Ingresa el nombre del candidato');return;}
+  const p200res=document.getElementById('cP200res').value;
+  const e3=document.getElementById('cE3').value;
+  if(e3&&p200res!=='cumplido'){alert('⚠️ No puede avanzar a entrevista de carrera sin Proyecto 200 cumplido.');return;}
+  const c={
+    nombre,fuente:document.getElementById('cFuente').value,
+    fechaContacto:document.getElementById('cFechaContacto').value,
+    telefono:document.getElementById('cTelefono').value,
+    notas:document.getElementById('cNotas').value,
+    e1:document.getElementById('cE1').value,
+    e2:document.getElementById('cE2').value,
+    p200fecha:document.getElementById('cP200fecha').value,
+    p200res,e3:document.getElementById('cE3').value,
+    clave:document.getElementById('cClave').value,
+  };
+  if(editCandIdx>=0)STATE.candidatos[editCandIdx]=c;
+  else STATE.candidatos.push(c);
+  // Si tiene clave y no tiene agente, convertir
+  if(c.clave&&!STATE.agentes.find(a=>a.nombre===c.nombre)){
+    const nuevoId='ag_'+Date.now();
+    STATE.agentes.push({id:nuevoId,nombre:c.nombre,tipo:'aspirante',fechaClave:c.clave,mesTTC:mesDesde(c.clave),diasSin:0});
+  }
+  cerrar('modalCandidato');
+  guardar();
+  renderReclutamiento();
+  renderAgentes();
+}
+
+function verCandidato(idx){editarCandidato(idx);}
+
+function convertirAgente(idx){
+  const c=STATE.candidatos[idx];
+  const clave=prompt(`Ingresa la fecha de liberación de clave Insignia Life para ${c.nombre} (YYYY-MM-DD):`,hoy());
+  if(!clave)return;
+  STATE.candidatos[idx].clave=clave;
+  const nuevoId='ag_'+Date.now();
+  STATE.agentes.push({id:nuevoId,nombre:c.nombre,tipo:'aspirante',fechaClave:clave,mesTTC:mesDesde(clave),diasSin:0});
+  guardar();
+  renderReclutamiento();
+  renderAgentes();
+  showToast(`✓ ${c.nombre} convertido a agente`);
+}
+
+// ══════════════════════════════════════════
+// MODALES — AGENTE DIRECTO
+// ══════════════════════════════════════════
+function abrirFichaAgente(){
+  editAgIdx=-1;
+  document.getElementById('titAgente').textContent='Agente directo';
+  document.getElementById('aNombre').value='';
+  document.getElementById('aTipo').value='aspirante';
+  document.getElementById('aClave').value='';
+  document.getElementById('aDias').value=0;
+  document.getElementById('modalAgente').classList.add('open');
+}
+
+function editarAgente(idx){
+  editAgIdx=idx;
+  const a=STATE.agentes[idx];
+  document.getElementById('titAgente').textContent=`Editar: ${a.nombre}`;
+  document.getElementById('aNombre').value=a.nombre||'';
+  document.getElementById('aTipo').value=a.tipo||'aspirante';
+  document.getElementById('aClave').value=a.fechaClave||'';
+  document.getElementById('aDias').value=a.diasSin||0;
+  document.getElementById('modalAgente').classList.add('open');
+}
+
+function guardarAgenteDirecto(){
+  const nombre=document.getElementById('aNombre').value.trim();
+  if(!nombre){alert('Ingresa el nombre');return;}
+  const fechaClave=document.getElementById('aClave').value;
+  const a={
+    id:editAgIdx>=0?STATE.agentes[editAgIdx].id:('ag_'+Date.now()),
+    nombre,tipo:document.getElementById('aTipo').value,
+    fechaClave,mesTTC:mesDesde(fechaClave)||1,
+    diasSin:+document.getElementById('aDias').value||0,
+  };
+  if(editAgIdx>=0)STATE.agentes[editAgIdx]=a;
+  else STATE.agentes.push(a);
+  cerrar('modalAgente');
+  guardar();
+  renderAgentes();
+}
+
+function eliminarAgente(idx){
+  if(!confirm(`¿Eliminar a ${STATE.agentes[idx].nombre}?`))return;
+  STATE.agentes.splice(idx,1);
+  guardar();
+  renderAgentes();
+}
+
+// ══════════════════════════════════════════
+// MODALES — VENTA
+// ══════════════════════════════════════════
+function abrirModalVenta(){
+  editVentaIdx=-1;
+  document.getElementById('titVenta').textContent='Registrar venta';
+  document.getElementById('vFecha').value=hoy();
+  document.getElementById('vPrima').value='';
+  document.getElementById('vFactor').value=80;
+  document.getElementById('vNotas').value='';
+  document.getElementById('vProducto').value='vitalicio';
+  document.getElementById('vAnios').value=10;
+  document.getElementById('primaCompDisplay').textContent='$0';
+  document.getElementById('conteoPolizaInfo').textContent='Ingresa prima para calcular conteo';
+  // Actualizar select agentes
+  const sel=document.getElementById('vAgente');
+  sel.innerHTML='<option value="">Seleccionar agente...</option>';
+  STATE.agentes.forEach(a=>sel.innerHTML+=`<option value="${a.id}">${a.nombre}</option>`);
+  document.getElementById('modalVenta').classList.add('open');
+}
+
+function actualizarFactor(){
+  const prod=document.getElementById('vProducto').value;
+  document.getElementById('vFactor').value=prod==='vitalicio'?80:100;
+  calcPrimaComp();
+}
+
+function calcPrimaComp(){
+  const prima=+document.getElementById('vPrima').value||0;
+  const factor=+document.getElementById('vFactor').value||80;
+  const comp=prima*factor/100;
+  document.getElementById('primaCompDisplay').textContent=fmt(comp);
+  const conteo=conteoPoliza(prima);
+  document.getElementById('conteoPolizaInfo').textContent=
+    prima<10000?'Prima < $10,000 → NO cuenta para conteo TTC':
+    `Prima anualizada ${fmt(prima)} → ${conteo} póliza${conteo===2?'s':''} de conteo (TTC)`;
+}
+
+function guardarVenta(){
+  const agenteId=document.getElementById('vAgente').value;
+  if(!agenteId){alert('Selecciona un agente');return;}
+  const prima=+document.getElementById('vPrima').value||0;
+  if(!prima){alert('Ingresa la prima');return;}
+  const factor=+document.getElementById('vFactor').value||80;
+  const v={
+    id:'v_'+Date.now(),agenteId,
+    fecha:document.getElementById('vFecha').value,
+    producto:document.getElementById('vProducto').value,
+    anios:+document.getElementById('vAnios').value||10,
+    prima,factor,
+    primaComp:Math.round(prima*factor/100),
+    conteoPoliza:conteoPoliza(prima),
+    notas:document.getElementById('vNotas').value,
+  };
+  if(editVentaIdx>=0)STATE.ventas[editVentaIdx]=v;
+  else STATE.ventas.push(v);
+  cerrar('modalVenta');
+  guardar();
+  renderProduccion();
+  renderAgentes();
+  showToast('✓ Venta registrada');
+}
+
+function eliminarVenta(idx){
+  if(!confirm('¿Eliminar esta venta?'))return;
+  STATE.ventas.splice(idx,1);
+  guardar();
+  renderProduccion();
+  renderAgentes();
+}
+
+// ══════════════════════════════════════════
+// HELPERS MODALES
+// ══════════════════════════════════════════
+function cerrar(id){document.getElementById(id).classList.remove('open');}
+
+function renderPanel(id){
+  if(id==='dashboard')renderDashboard();
+  else if(id==='reclutamiento')renderReclutamiento();
+  else if(id==='agentes')renderAgentes();
+  else if(id==='produccion')renderProduccion();
+  else if(id==='ranking')renderRanking();
+}
+
+function renderTodo(){
+  const active=document.querySelector('.panel.active');
+  if(active)renderPanel(active.id);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+cargar();
+renderDashboard();
+</script>
+</body>
+</html>
